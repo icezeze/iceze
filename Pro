@@ -1,0 +1,136 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+
+root = Tk()
+root.title('โปรแกรมพยากรณ์การพ้นสภาพการเป็นนักศึกษา')
+root.geometry('480x320')
+root.option_add('*font', 'tahoma 10')
+
+
+def Reset():
+    sex.set(value=0)
+    com.set('')
+    os.set('')
+    pro.set('')
+    grade.set('')
+
+def Exit():
+    status = messagebox.askyesno(title="ยืนยัน", message="คุณต้องการออกจากโปรแกรมใช่หรือไม่")
+    if status > 0:
+        root.destroy()
+        return
+
+def Cal():
+    gen = int(sex.get())
+    com = float(commath.get())
+    os = float(sys.get())
+    pro = float(program.get())
+    gpa = float(grade.get())
+    total = 1.0605-0.1016*gen+0.04*com-0.0108*os+0.0681*pro-0.472*gpa
+    try:
+       if (gen == 0):
+           mb_button = messagebox.askokcancel('ผลลัพธ์', 'กรุณากรอกเพศ')
+           if mb_button == True:
+               ...
+           else:
+               ...
+
+       elif (com == 0):
+           mb_button = messagebox.askokcancel('ผลลัพธ์', 'พ้นสภาพการเป็นนักศึกษา')
+           if mb_button == True:
+               ...
+           else:
+               ...
+
+       elif (os == 0):
+           mb_button = messagebox.askokcancel('ผลลัพธ์', 'พ้นสภาพการเป็นนักศึกษา')
+           if mb_button == True:
+               ...
+           else:
+               ...
+
+       elif (pro == 0):
+           mb_button = messagebox.askokcancel('ผลลัพธ์', 'พ้นสภาพการเป็นนักศึกษา')
+           if mb_button == True:
+               ...
+           else:
+               ...
+       elif (gpa < 1.7):
+           mb_button = messagebox.askokcancel('ผลลัพธ์', 'พ้นสภาพการเป็นนักศึกษา')
+           if mb_button == True:
+               ...
+           else:
+               ...
+       else:
+           mb_button = messagebox.askokcancel('ผลลัพธ์', 'ยังคงสภาพนักศึกษา')
+           if mb_button == True:
+               ...
+           else:
+               ...
+
+    except:
+       total.set()
+
+sex = IntVar(value=0)
+commath = IntVar()
+sys = IntVar()
+program = IntVar()
+grade = IntVar()
+total = IntVar()
+
+sex.set(value=0)
+commath.set('')
+sys.set('')
+program.set('')
+grade.set('')
+total.set('')
+
+fm0 = LabelFrame(root, text='เพศ', relief='raise')
+fm0.pack(side=TOP, fill=X)
+
+Male = Radiobutton(fm0, text='ชาย', variable=sex, value=1)
+Male.grid(row=1, column=1, sticky=W)
+Female = Radiobutton(fm0, text='หญิง', variable=sex, value=2)
+Female.grid(row=1, column=2, sticky=W)
+
+fm1 = LabelFrame(root, text='กรอกข้อมูล', relief='raise')
+fm1.pack(side=LEFT, fill=BOTH, padx=5, pady=5)
+
+L1 = ttk.Label(fm1, text='คณิตศาสตร์คอมพิวเตอร์')
+L1.grid(row=0, column=0, sticky=W, padx=5, pady=5)
+com = ttk.Combobox(fm1, value=(0, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0), width=20, textvariable=commath, state='readonly')
+com.current()
+com.grid(row=0, column=1, padx=5, pady=5)
+
+L2 = ttk.Label(fm1, text='ระบบปฏิบัติการเบื้องต้น')
+L2.grid(row=1, column=0, sticky=W, padx=5, pady=5)
+os = ttk.Combobox(fm1, value=(0, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0), width=20, textvariable=sys, state='readonly')
+os.current()
+os.grid(row=1, column=1, padx=5, pady=5)
+
+L3 = ttk.Label(fm1, text='การโปรแกรมคอมพิวเตอร์')
+L3.grid(row=2, column=0, sticky=W, padx=5, pady=5)
+pro = ttk.Combobox(fm1, value=(0, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0), width=20, textvariable=program, state='readonly')
+pro.current()
+pro.grid(row=2, column=1, padx=5, pady=5)
+
+L4 = ttk.Label(fm1, text='เกรดเฉลี่ยสะสม(GPA)')
+L4.grid(row=3, column=0, sticky=W, padx=5, pady=5)
+gpa = ttk.Entry(fm1, textvariable=grade, width=23)
+gpa.grid(row=3, column=1, padx=5, pady=5)
+
+fm2 = LabelFrame(root, text="Menu", relief='raise')
+fm2.pack(side=RIGHT, fill=BOTH, padx=5, pady=5)
+
+B1 = Button(fm2, text='คำนวณผล', bd=5, width=14, command=Cal, cursor="mouse")
+B1.grid(row=1, column=1, sticky=N, padx=5, pady=5)
+
+B3 = Button(fm2, text="แก้ไข", bd=5, width=14, command=Reset, cursor="mouse")
+B3.grid(row=2, column=1, sticky=N, padx=5, pady=5)
+
+B2 = Button(fm2, text="ออกจากโปรแกรม", bd=5, width=14, command=Exit, cursor="mouse")
+B2.bind('<Button-1>', Exit)
+B2.grid(row=3, column=1, sticky=N, padx=5, pady=5)
+
+mainloop()
